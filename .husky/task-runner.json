@@ -1,0 +1,51 @@
+{
+  "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+  "tasks": [
+    {
+      "name": "Confirm Running Hooks",
+      "command": "echo",
+      "args": ["Running 🐶 Pre-Commit Husky Hooks"],
+      "windows": {
+        "command": "cmd",
+        "args": ["/c", "Running 🐶 Pre-Commit Husky Hooks"]
+      },
+      "group": "pre-commit"
+    },
+    {
+      "name": "Build | dotnet",
+      "command": "dotnet",
+      "args": ["build"],
+      "group": "pre-commit"
+    },
+    {
+      "name": "Clean C# | ReSharper CLI",
+      "command": "dotnet",
+      "args": ["jb", "cleanupcode", "${staged}"],
+      "include": ["**/*.cs"],
+      "group": "pre-commit"
+    },
+    {
+      "name": "Format non-C# | Prettier CLI",
+      "command": "bunx",
+      "args": ["prettier", "${staged}", "--write"],
+      "include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.yml",
+        "**/*.yaml",
+        "**/*.json",
+        ".*rc"
+      ],
+      "group": "pre-commit"
+    },
+    {
+      "name": "Format C# | CSharpier",
+      "command": "dotnet",
+      "args": ["csharpier", "${staged}"],
+      "include": ["**/*.cs"],
+      "group": "pre-commit"
+    }
+  ]
+}
