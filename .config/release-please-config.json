@@ -1,0 +1,20 @@
+{
+  "packages": {
+    ".": {
+      "package-name": "SoapOnAScope",
+      "release-type": "simple",
+      "extra-files": [
+        {
+          "type": "xml",
+          "path": "src/lib/SoapOnAScope/SoapOnAScope.csproj",
+          "xpath": "//Project/PropertyGroup/Version"
+        },
+        {
+          "type": "xml",
+          "path": "src/lib/SoapOnAScop.Web/SoapOnAScope.Web.csproj",
+          "xpath": "//Project/PropertyGroup/Version"
+        }
+      ]
+    }
+  }
+}

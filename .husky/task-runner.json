@@ -2,14 +2,10 @@
   "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
   "tasks": [
     {
-      "name": "Confirm Running Hooks",
-      "command": "echo",
-      "args": ["Running 🐶 Pre-Commit Husky Hooks"],
-      "windows": {
-        "command": "cmd",
-        "args": ["/c", "Running 🐶 Pre-Commit Husky Hooks"]
-      },
-      "group": "pre-commit"
+      "name": "Commit | commitlint",
+      "command": "bunx",
+      "args": ["--no", "commitlint", "--edit", "$1"],
+      "group": "commit-msg"
     },
     {
       "name": "Build | dotnet",
@@ -45,6 +41,24 @@
       "command": "dotnet",
       "args": ["csharpier", "${staged}"],
       "include": ["**/*.cs"],
+      "group": "pre-commit"
+    },
+    {
+      "name": "Test | dotnet",
+      "command": "dotnet",
+      "args": ["test"],
+      "group": "pre-commit"
+    },
+    {
+      "name": "Verify Pack (Core) | dotnet",
+      "command": "dotnet",
+      "args": ["pack", "src/SoapOnAScope/SoapOnAScope.csproj"],
+      "group": "pre-commit"
+    },
+    {
+      "name": "Verify Pack (Web) | dotnet",
+      "command": "dotnet",
+      "args": ["pack", "src/SoapOnAScope.Web/SoapOnAScope.Web.csproj"],
       "group": "pre-commit"
     }
   ]

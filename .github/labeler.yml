@@ -1,0 +1,41 @@
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - docs/**
+          - sandbox/**
+
+taskfile:
+  - changed-files:
+      - any-glob-to-any-file:
+          - Taskfile.yml
+
+husky:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .husky/**
+
+github config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+
+test:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/test/**
+
+lib:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/lib/**
+
+benchmarks:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/benchmarks/**
+
+# Matches the 'release-please' PR pattern for releases
+release:
+  - head-branch: "release*"
+  - base-branch: "main"

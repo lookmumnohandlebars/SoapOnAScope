@@ -1,0 +1,40 @@
+# To use this taskfile, please install from https://taskfile.dev/installation/
+# List all available commands with `task --list-all`
+version: "3"
+
+tasks:
+  compatible:
+    silent: true
+    cmds:
+      - echo "❓ Will this machine work? Let's find out... ❓"
+      - echo "Check .NET 8 is here..." && dotnet --list-sdks | grep  "9\." -q || echo -e "\033[0;31mThe .Net 8 SDK is required - please install\033[0m && exit 1"
+      - echo "Check Bun is here..." && bun --version || echo -e "\033[0;31mThe Bun runtime is required - please install && exit 1"
+      - echo -e "No red and no errors means you're all set up 👍"
+
+  build:
+    cmds:
+      - dotnet build src/SoapOnAScope.sln
+
+  test:
+    cmds:
+      - dotnet test src/SoapOnAScope.sln
+
+  pack:
+    cmds:
+      - for: ["SoapOnAScope", "SoapOnAScope.Web"]
+        cmd: dotnet pack src/lib/{{ .ITEM }}
+
+  publish:
+    deps:
+      - pack
+    vars:
+      API_KEY:
+    cmds:
+      - dotnet nuget push .\artifacts\*.nupkg --api-key {{ .API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+  docs-local:
+    cmds:
+      - dotnet tool run docfx .config/docfx.json --serve
+  docs-build:
+    cmds:
+      - dotnet tool run docfx .config/docfx.json --serve
