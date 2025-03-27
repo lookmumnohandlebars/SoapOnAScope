@@ -8,7 +8,7 @@ tasks:
     vars:
       FILES: "."
     cmds:
-      - dotnet jb cleanupcode {{.FILES}}
+      - dotnet jb cleanupcode {{.FILES}} --verbosity ERROR
 
   # task fmt:csharp
   # task fmt:csharp FILES=${staged}
