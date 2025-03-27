@@ -1,5 +1,9 @@
 name: Setup Required Dependencies
 description: "Setup all required dependencies for working with the source code"
+inputs:
+  github_token:
+    description: "A Github PAT (e.g. secrets.GITHUB_TOKEN) with the required permissions"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -7,7 +11,7 @@ runs:
       uses: arduino/setup-task@v2
       with:
         version: 3.x
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.github_token }}
     - name: Install .NET SDK
       uses: actions/setup-dotnet@v4
       with:

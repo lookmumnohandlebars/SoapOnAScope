@@ -19,6 +19,8 @@ jobs:
 
       - name: 🛠️ Setup Required Dependencies
         uses: ./.github/actions/setup
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
           NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
@@ -44,6 +46,8 @@ jobs:
 
       - name: 🛠️ Setup Required Dependencies
         uses: ./.github/actions/setup
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
           NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
