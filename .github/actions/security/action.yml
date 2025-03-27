@@ -1,0 +1,13 @@
+name: Security Checks On Repo
+description: "Setup all required dependencies for working with the source code"
+inputs:
+  snyk_token:
+    description: "A Snyk PAT (e.g. secrets.SNYK_TOKEN) for using Snyk"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/dotnet@master
+      env:
+        SNYK_TOKEN: ${{ inputs.snyk_token }}

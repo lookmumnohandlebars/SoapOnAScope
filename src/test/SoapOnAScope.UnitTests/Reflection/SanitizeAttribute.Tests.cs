@@ -23,10 +23,7 @@ public class SanitizeAttributeTests
     public void TestClass_decorated_with_AutoSanitize_should_have_default_values()
     {
         var testObject = new TestClassWithDefaults();
-        var attribute = testObject
-            .GetType()
-            .GetProperty("Property")!
-            .GetCustomAttribute<SanitizeAttribute>();
+        var attribute = testObject.GetType().GetProperty("Property")!.GetCustomAttribute<SanitizeAttribute>();
         attribute
             .Should()
             .BeEquivalentTo(
@@ -39,10 +36,7 @@ public class SanitizeAttributeTests
     public void TestClass_with_explicit_opposite_to_defaults_should_match()
     {
         var testObject = new TestClassWithOppositeDefaults();
-        var attribute = testObject
-            .GetType()
-            .GetProperty("Property")!
-            .GetCustomAttribute<SanitizeAttribute>();
+        var attribute = testObject.GetType().GetProperty("Property")!.GetCustomAttribute<SanitizeAttribute>();
         attribute
             .Should()
             .BeEquivalentTo(

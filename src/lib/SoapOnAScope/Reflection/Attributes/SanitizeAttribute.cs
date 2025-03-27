@@ -21,6 +21,5 @@ public class SanitizeAttribute : Attribute
     /// <param name="html"> Defaults to `false`</param>
     /// <param name="url"> Defaults to `false`</param>
     /// <param name="js"> Defaults to `false`</param>
-    public SanitizeAttribute(bool trim = true, bool html = false, bool url = false, bool js = false)
-    { }
+    public SanitizeAttribute(bool trim = true, bool html = false, bool url = false, bool js = false) { }
 }

@@ -4,10 +4,7 @@ namespace SoapOnAScope;
 
 internal static class EnumerableSanitizer
 {
-    public static bool Sanitize(
-        IEnumerable enumerable,
-        SanitizationSpecification sanitizationSpecification
-    )
+    public static bool Sanitize(IEnumerable enumerable, SanitizationSpecification sanitizationSpecification)
     {
         var res = false;
 
@@ -15,9 +12,7 @@ internal static class EnumerableSanitizer
         {
             for (var i = 0; i < strList.Count; i++)
             {
-                strList[i] =
-                    new StringSanitizer(sanitizationSpecification).PureSanitize(strList[i])
-                    ?? string.Empty;
+                strList[i] = new StringSanitizer(sanitizationSpecification).PureSanitize(strList[i]) ?? string.Empty;
             }
 
             return true;
@@ -27,9 +22,7 @@ internal static class EnumerableSanitizer
         {
             for (var i = 0; i < strArray.Length; i++)
             {
-                strArray[i] =
-                    new StringSanitizer(sanitizationSpecification).PureSanitize(strArray[i])
-                    ?? string.Empty;
+                strArray[i] = new StringSanitizer(sanitizationSpecification).PureSanitize(strArray[i]) ?? string.Empty;
             }
 
             return true;

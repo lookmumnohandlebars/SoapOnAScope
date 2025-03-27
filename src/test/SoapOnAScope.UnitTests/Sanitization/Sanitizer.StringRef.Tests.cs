@@ -7,10 +7,7 @@ public partial class SanitizerTests
 {
     [Theory]
     [InlineData(StringTestCases.Trim.NeedsTrimming, StringTestCases.Trim.BaseString)]
-    public void Sanitize_with_string_parameter_and_default_specs_trims(
-        string? input,
-        string? expected
-    )
+    public void Sanitize_with_string_parameter_and_default_specs_trims(string? input, string? expected)
     {
         Sanitizer.Sanitize(ref input);
         input.Should().BeEquivalentTo(expected);

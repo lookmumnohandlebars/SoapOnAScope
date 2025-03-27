@@ -29,10 +29,7 @@ public static class Sanitizer
     /// </summary>
     /// <param name="stringValue"></param>
     /// <param name="specification"></param>
-    public static void Sanitize(
-        ref string? stringValue,
-        SanitizationSpecification? specification = null
-    )
+    public static void Sanitize(ref string? stringValue, SanitizationSpecification? specification = null)
     {
         var specs = specification ?? new SanitizationSpecification(Trim: true);
         var stringSanitizer = new StringSanitizer(specs);

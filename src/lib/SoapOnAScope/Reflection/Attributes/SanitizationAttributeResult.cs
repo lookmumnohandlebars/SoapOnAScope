@@ -1,6 +1,3 @@
 namespace SoapOnAScope;
 
-internal record struct SanitizationAttributeResult(
-    bool IsEnabled,
-    SanitizationSpecification Specification
-);
+internal record struct SanitizationAttributeResult(bool IsEnabled, SanitizationSpecification Specification);

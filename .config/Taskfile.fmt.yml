@@ -1,20 +1,29 @@
 version: "3"
 
 tasks:
-  # task fmt:csharp -- .
-  csharp:
-    desc: Format the C# source code
-    cmds:
-      - dotnet csharpier {{.CLI_ARGS}}
-
-  # task fmt:refactor -- .
+  # task fmt:refactor
+  # task fmt:refactor FILES=${staged}
   refactor:
-    desc: Refactor the C# source code with quality gates in use
+    desc: Refactor the C# source code with quality gates in use. Defaults to all files
+    vars:
+      FILES: "."
     cmds:
-      - dotnet jb cleanupcode {{.CLI_ARGS}}
+      - dotnet jb cleanupcode {{.FILES}}
 
-  # task fmt:refactor -- .
-  prettier:
-    desc: Format the non-C# files
+  # task fmt:csharp
+  # task fmt:csharp FILES=${staged}
+  csharp:
+    desc: Format the C# source code. Defaults to all files
+    vars:
+      FILES: "."
     cmds:
-      - bunx prettier {{.CLI_ARGS}} --write
+      - dotnet csharpier {{.FILES}} --config-path .config/csharpierrc.json
+
+  # task fmt:prettier
+  # task fmt:prettier FILES=${staged}
+  prettier:
+    desc: Format the non-C# files. Defaults to all files
+    vars:
+      FILES: "."
+    cmds:
+      - bunx prettier {{.FILES}} --write --config .config/prettierrc.json

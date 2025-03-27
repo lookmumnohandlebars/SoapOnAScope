@@ -1,0 +1,8 @@
+﻿[
+  AutoSanitizeAttribute,
+  SanitizeAttribute,
+  InvalidSanitizationTargetException,
+  SanitizationSpecification,
+  Sanitizer,
+  SanitizeRequestAttribute
+]

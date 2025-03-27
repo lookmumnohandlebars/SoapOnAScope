@@ -1,0 +1,83 @@
+﻿{
+  AutoSanitizeAttribute: [
+    Attribute.Equals(object obj),
+    Attribute.GetHashCode(),
+    Attribute.get_TypeId(),
+    Attribute.Match(object obj),
+    Attribute.IsDefaultAttribute(),
+    object.GetType(),
+    object.ToString()
+  ],
+  InvalidSanitizationTargetException: [
+    Exception.get_TargetSite(),
+    Exception.get_Message(),
+    Exception.get_Data(),
+    Exception.GetBaseException(),
+    Exception.get_InnerException(),
+    Exception.get_HelpLink(),
+    Exception.set_HelpLink(string value),
+    Exception.get_Source(),
+    Exception.set_Source(string value),
+    Exception.GetObjectData(SerializationInfo info, StreamingContext context),
+    Exception.ToString(),
+    Exception.get_HResult(),
+    Exception.set_HResult(int value),
+    Exception.GetType(),
+    Exception.get_StackTrace(),
+    object.GetType(),
+    object.Equals(object obj),
+    object.GetHashCode()
+  ],
+  SanitizationSpecification: [
+    SanitizationSpecification.get_Trim(),
+    SanitizationSpecification.set_Trim(bool value),
+    SanitizationSpecification.get_HtmlEncode(),
+    SanitizationSpecification.set_HtmlEncode(bool value),
+    SanitizationSpecification.get_UrlEncode(),
+    SanitizationSpecification.set_UrlEncode(bool value),
+    SanitizationSpecification.get_JsEncode(),
+    SanitizationSpecification.set_JsEncode(bool value),
+    SanitizationSpecification.ToString(),
+    SanitizationSpecification.op_Inequality(SanitizationSpecification left, SanitizationSpecification right),
+    SanitizationSpecification.op_Equality(SanitizationSpecification left, SanitizationSpecification right),
+    SanitizationSpecification.GetHashCode(),
+    SanitizationSpecification.Equals(object obj),
+    SanitizationSpecification.Equals(SanitizationSpecification other),
+    SanitizationSpecification.Deconstruct(Boolean& Trim, Boolean& HtmlEncode, Boolean& UrlEncode, Boolean& JsEncode),
+    object.GetType()
+  ],
+  SanitizeAttribute: [
+    Attribute.Equals(object obj),
+    Attribute.GetHashCode(),
+    Attribute.get_TypeId(),
+    Attribute.Match(object obj),
+    Attribute.IsDefaultAttribute(),
+    object.GetType(),
+    object.ToString()
+  ],
+  Sanitizer: [
+    Sanitizer.Sanitize(T instance),
+    Sanitizer.Sanitize(String& stringValue, Nullable<SanitizationSpecification> specification),
+    object.GetType(),
+    object.ToString(),
+    object.Equals(object obj),
+    object.GetHashCode()
+  ],
+  SanitizeRequestAttribute: [
+    SanitizeRequestAttribute.OnActionExecuting(ActionExecutingContext actionContext),
+    ActionFilterAttribute.get_Order(),
+    ActionFilterAttribute.set_Order(int value),
+    ActionFilterAttribute.OnActionExecuted(ActionExecutedContext context),
+    ActionFilterAttribute.OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next),
+    ActionFilterAttribute.OnResultExecuting(ResultExecutingContext context),
+    ActionFilterAttribute.OnResultExecuted(ResultExecutedContext context),
+    ActionFilterAttribute.OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next),
+    Attribute.Equals(object obj),
+    Attribute.GetHashCode(),
+    Attribute.get_TypeId(),
+    Attribute.Match(object obj),
+    Attribute.IsDefaultAttribute(),
+    object.GetType(),
+    object.ToString()
+  ]
+}

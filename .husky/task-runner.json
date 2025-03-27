@@ -2,7 +2,7 @@
   "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
   "tasks": [
     {
-      "name": "Commit | commitlint",
+      "name": "Commit | Lint",
       "command": "bunx",
       "args": ["--no", "commitlint", "--edit", "$1"],
       "group": "commit-msg"
@@ -10,18 +10,18 @@
     {
       "name": "Task | Build",
       "command": "task",
-      "args": ["src:build"],
+      "args": ["build"],
       "group": "pre-commit"
     },
     {
-      "name": "Task | C# Quality Gate",
+      "name": "Task | Refactor C#",
       "command": "task",
-      "args": ["fmt:refactor", "--", "${staged}"],
+      "args": ["fmt:refactor", "FILES=${staged}"],
       "include": ["**/*.cs"],
       "group": "pre-commit"
     },
     {
-      "name": " | Prettier CLI",
+      "name": "Task | Format w/ Prettier",
       "command": "task",
       "args": ["fmt:prettier", "--", "${staged}"],
       "include": [
@@ -37,20 +37,20 @@
       "group": "pre-commit"
     },
     {
-      "name": "Format C# | CSharpier",
+      "name": "Task | Format C#",
       "command": "task",
       "args": ["fmt:csharp", "--", "${staged}"],
       "include": ["**/*.cs"],
       "group": "pre-commit"
     },
     {
-      "name": "Test | .NET",
+      "name": "Task | Tests",
       "command": "task",
-      "args": ["src:test"],
+      "args": ["test"],
       "group": "pre-commit"
     },
     {
-      "name": "Verify Pack | .NET",
+      "name": "Task | Verify Pack",
       "command": "dotnet",
       "args": ["pack", "src/SoapOnAScope/SoapOnAScope.csproj"],
       "group": "pre-commit"
@@ -58,7 +58,7 @@
     {
       "name": "Task | Clean",
       "command": "task",
-      "args": ["src:clean"],
+      "args": ["clean"],
       "group": "post-checkout"
     }
   ]

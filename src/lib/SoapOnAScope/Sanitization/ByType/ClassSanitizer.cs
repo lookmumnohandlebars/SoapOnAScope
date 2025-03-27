@@ -6,20 +6,14 @@ namespace SoapOnAScope;
 
 internal static class ClassSanitizer
 {
-    public static bool Sanitize<T>(
-        T? model,
-        SanitizationSpecification? parentSanitizationAttribute = null
-    )
+    public static bool Sanitize<T>(T? model, SanitizationSpecification? parentSanitizationAttribute = null)
         where T : class
     {
         if (model is null)
             return false;
         var modelType = model.GetType();
         var specResult = parentSanitizationAttribute is not null
-            ? new SanitizationAttributeResult(
-                true,
-                (SanitizationSpecification)parentSanitizationAttribute
-            )
+            ? new SanitizationAttributeResult(true, (SanitizationSpecification)parentSanitizationAttribute)
             : new SanitizationAttributeResult(false, new SanitizationSpecification());
         if (modelType.IsEnumerable())
             EnumerableSanitizer.Sanitize((IEnumerable)model, specResult.Specification);
@@ -34,21 +28,9 @@ internal static class ClassSanitizer
     {
         var properties = modelType.GetProperties();
         var autoSanitizationAttribute = modelType.GetSpecFromAttribute();
-        var hasPropertySanitized = HandleStringProperties(
-            model,
-            autoSanitizationAttribute,
-            properties
-        );
-        var hasObjectSanitized = HandleObjectProperties(
-            model,
-            autoSanitizationAttribute,
-            properties
-        );
-        var hasEnumerableSanitized = HandleEnumerableProperties(
-            model,
-            autoSanitizationAttribute,
-            properties
-        );
+        var hasPropertySanitized = HandleStringProperties(model, autoSanitizationAttribute, properties);
+        var hasObjectSanitized = HandleObjectProperties(model, autoSanitizationAttribute, properties);
+        var hasEnumerableSanitized = HandleEnumerableProperties(model, autoSanitizationAttribute, properties);
         return hasPropertySanitized || hasObjectSanitized || hasEnumerableSanitized;
     }
 
@@ -62,8 +44,7 @@ internal static class ClassSanitizer
             .Aggregate(
                 false,
                 (current, stringProp) =>
-                    StringPropertySanitizer.Sanitize(stringProp, model, autoSanitizationAttribute)
-                    || current
+                    StringPropertySanitizer.Sanitize(stringProp, model, autoSanitizationAttribute) || current
             );
 
     private static bool HandleObjectProperties<T>(
@@ -79,11 +60,8 @@ internal static class ClassSanitizer
             if (nestedModel is null)
                 continue;
             hasSanitized =
-                SanitizeClassProperties(
-                    nestedModel,
-                    nestedProp.PropertyType,
-                    autoSanitizationAttribute
-                ) || hasSanitized;
+                SanitizeClassProperties(nestedModel, nestedProp.PropertyType, autoSanitizationAttribute)
+                || hasSanitized;
         }
 
         return hasSanitized;
@@ -102,10 +80,8 @@ internal static class ClassSanitizer
             if (nestedModel is null)
                 continue;
             hasSanitized =
-                EnumerableSanitizer.Sanitize(
-                    (IEnumerable)nestedModel,
-                    autoSanitizationAttribute.Specification
-                ) || hasSanitized;
+                EnumerableSanitizer.Sanitize((IEnumerable)nestedModel, autoSanitizationAttribute.Specification)
+                || hasSanitized;
         }
 
         return hasSanitized;

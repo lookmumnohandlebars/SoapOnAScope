@@ -6,13 +6,7 @@ public class SdkArchitectureTests
 {
     [Fact]
     public void Namespace_ShouldOnlyBePackageName() =>
-        Types
-            .InAssembly(Assemblies.Main)
-            .That()
-            .ArePublic()
-            .Should()
-            .ResideInNamespaceMatching("SoapOnAScope")
-            .Check();
+        Types.InAssembly(Assemblies.Main).That().ArePublic().Should().ResideInNamespaceMatching("SoapOnAScope").Check();
 
     [Fact]
     public void Namespace_ShouldOnlyBePackageNameForWeb() =>

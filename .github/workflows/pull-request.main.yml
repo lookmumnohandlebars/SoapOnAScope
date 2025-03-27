@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: 🛠️ Setup Required Dependencies
         uses: ./.github/actions/setup
@@ -24,11 +24,14 @@ jobs:
         env:
           NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
+      - name: 🏗️ Build
+        run: task build
+
       - name: Format
         run: |
-          task fmt:refactor -- .
-          task fmt:csharp -- .
-          task fmt:prettier -- .
+          task fmt:refactor
+          task fmt:csharp 
+          task fmt:prettier
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -37,12 +40,13 @@ jobs:
           branch: ${{ github.head_ref }}
 
   test:
-    name: 🏗️ Build
-    needs: format
+    name: 🧪 Test
+    needs:
+      - format
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: 🛠️ Setup Required Dependencies
         uses: ./.github/actions/setup
@@ -51,17 +55,32 @@ jobs:
         env:
           NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
-      - name: 💅 Format
-        run: |
-          task fmt:refactor -- .
-          task fmt:csharp -- .
-          task fmt:prettier -- .
-
       - name: 🏗️ Build
-        run: task src:build
+        run: task ci:build
 
       - name: 🧪 Test
-        run: task src:test
+        run: task ci:test
 
-      - name: 🧳 Pack (dry-run)
-        run: task src:pack
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: .NET Tests # Name of the check run which will be created
+          path: test-results.trx # Path to test results
+          reporter: dotnet-trx # Format of test results
+
+      - name: 🧳 Pack
+        run: task ci:pack
+
+  security:
+    name: 🔒 Security
+    needs:
+      - format
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+      - name: 🔒 Security Checks
+        uses: ./.github/actions/security
+        with:
+          snyk_token: ${{ secrets.SNYK_TOKEN }}

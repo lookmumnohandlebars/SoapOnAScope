@@ -23,12 +23,7 @@ public class AutoSanitizeAttribute : Attribute
     /// <param name="url"></param>
     /// <param name="html"></param>
     /// <param name="js"></param>
-    public AutoSanitizeAttribute(
-        bool trim = true,
-        bool url = false,
-        bool html = false,
-        bool js = false
-    )
+    public AutoSanitizeAttribute(bool trim = true, bool url = false, bool html = false, bool js = false)
     {
         Trim = trim;
         Url = url;

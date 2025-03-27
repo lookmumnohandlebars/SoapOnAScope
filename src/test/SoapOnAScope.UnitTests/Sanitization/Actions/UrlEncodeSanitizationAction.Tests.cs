@@ -28,10 +28,7 @@ public class UrlEncodeSanitizationActionTests
     [InlineData(StringTestCases.Empty.Blank, StringTestCases.Empty.Blank)]
     [InlineData(StringTestCases.Empty.Spaces, StringTestCases.Empty.Blank)]
     [InlineData(StringTestCases.Empty.NewLine, StringTestCases.Empty.Blank)]
-    public void Sanitize_if_predicate_is_true_handles_empty_and_null_strings(
-        string? input,
-        string? expected
-    )
+    public void Sanitize_if_predicate_is_true_handles_empty_and_null_strings(string? input, string? expected)
     {
         var sut = new TrimSanitizationAction(_ => true);
         var res = sut.Perform(input);

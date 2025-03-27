@@ -9,18 +9,10 @@ tasks:
       - dotnet restore src/SoapOnAScope.sln
       - dotnet build src/SoapOnAScope.sln --no-restore
 
-  build-cached:
-    desc: Build the source code (.NET) with packages cached
-    cmds:
-      - dotnet restore src/SoapOnAScope.sln --locked-mode
-      - dotnet build src/SoapOnAScope.sln --no-restore
-
   test:
     desc: Run all tests associated with the source code
-    deps:
-      - build
     cmds:
-      - dotnet test src/SoapOnAScope.sln
+      - dotnet test src/SoapOnAScope.sln --no-restore
 
   clean:
     desc: Clean the source code
@@ -37,17 +29,6 @@ tasks:
 
   pack:
     desc: Pack the source code into a NuGet package
-    deps:
-      - build
     cmds:
       - for: ["SoapOnAScope", "SoapOnAScope.Web"]
         cmd: dotnet pack src/lib/{{ .ITEM }}
-
-  publish:
-    desc: Publish the NuGet package to the NuGet repository
-    deps:
-      - pack
-    vars:
-      API_KEY: "Please provide your API key (API_KEY=abcd)"
-    cmds:
-      - dotnet nuget push .\artifacts\*.nupkg --api-key {{ .API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

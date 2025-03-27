@@ -25,10 +25,7 @@ internal static class UnknownSanitizer
         return false;
     }
 
-    public static bool Sanitize(
-        ref object? input,
-        SanitizationSpecification sanitizationSpecification
-    )
+    public static bool Sanitize(ref object? input, SanitizationSpecification sanitizationSpecification)
     {
         if (input is null)
             return false;

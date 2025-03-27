@@ -8,10 +8,7 @@ public class HtmlEncodeSanitizationActionTests
     [Theory]
     [InlineData(StringTestCases.Html.BaseString, StringTestCases.Html.BaseString)]
     [InlineData(StringTestCases.Html.EncodedString, StringTestCases.Html.EncodedString)]
-    public void Perform_should_do_nothing_if_predicate_returns_false(
-        string input,
-        string expectedOutput
-    )
+    public void Perform_should_do_nothing_if_predicate_returns_false(string input, string expectedOutput)
     {
         var sut = new HtmlEncodeSanitizationAction(_ => false);
         sut.Perform(input).Should().Be(expectedOutput);
