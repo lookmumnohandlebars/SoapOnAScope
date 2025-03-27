@@ -17,7 +17,8 @@
       "name": "Task | Build",
       "command": "task",
       "args": ["build"],
-      "group": "pre-commit"
+      "group": "pre-commit",
+      "include": ["src/**"]
     },
     {
       "name": "Task | Refactor C#",
@@ -53,19 +54,22 @@
       "name": "Task | Tests",
       "command": "task",
       "args": ["test"],
-      "group": "pre-commit"
+      "group": "pre-commit",
+      "include": ["src/**"]
     },
     {
       "name": "Task | Verify Pack",
       "command": "task",
       "args": ["pack"],
-      "group": "pre-commit"
+      "group": "pre-commit",
+      "include": ["src/**"]
     },
     {
       "name": "Task | Clean",
       "command": "task",
       "args": ["clean"],
-      "group": "post-checkout"
+      "group": "post-checkout",
+      "include": ["src/**"]
     }
   ]
 }
