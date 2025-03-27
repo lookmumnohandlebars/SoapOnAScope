@@ -13,10 +13,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Requests\" />
+        <Folder Include="Requests\" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\lib\SoapOnAScope.Web\SoapOnAScope.Web.csproj" />
+        <ProjectReference Include="..\..\lib\SoapOnAScope.Web\SoapOnAScope.Web.csproj" />
     </ItemGroup>
 </Project>

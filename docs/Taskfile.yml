@@ -1,0 +1,13 @@
+# To use this taskfile, please install from https://taskfile.dev/installation/
+# List all available commands with `task --list-all`
+version: "3"
+
+tasks:
+  local:
+    desc: Serve the documentation locally
+    cmds:
+      - dotnet tool run docfx .config/docfx.json --serve
+  build:
+    desc: Build the documentation
+    cmds:
+      - dotnet tool run docfx .config/docfx.json --serve

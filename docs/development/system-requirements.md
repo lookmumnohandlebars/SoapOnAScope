@@ -12,6 +12,8 @@
 - [Bun](https://bun.sh/docs/installation)
 - [Taskfile](https://taskfile.dev/installation/)
 
+To check everything is set up as expected, run `task compatible` from the root of the repo, which will give an indication
+
 ## Supported Editors
 
 - 🟢 Rider (JetBrains)

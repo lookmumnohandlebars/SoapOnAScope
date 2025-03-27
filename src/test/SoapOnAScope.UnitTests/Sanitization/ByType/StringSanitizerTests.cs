@@ -5,7 +5,6 @@ namespace SoapOnAScope.UnitTests.Sanitization.ByType;
 
 public class StringSanitizerTests
 {
-
     // [Theory]
     // [InlineData(StringTestCases.Trim., "TRIM ME")]
     // [InlineData(HtmlExample, "<div>EncodeMe</div>")]

@@ -9,6 +9,8 @@ taskfile:
   - changed-files:
       - any-glob-to-any-file:
           - Taskfile.yml
+          - "**/Taskfile.yml"
+          - "**/Taskfile.*.yml"
 
 husky:
   - changed-files:

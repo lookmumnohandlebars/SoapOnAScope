@@ -12,6 +12,7 @@ public class ComplexClass
     #endregion
 
     #region Strings
+
     public string SettableString { get; set; } = nameof(SettableString);
 
     public string EmptyString { get; set; } = string.Empty;
@@ -20,8 +21,6 @@ public class ComplexClass
     #endregion
 
     #region Nested Classes
-
-
 
     #endregion
 }

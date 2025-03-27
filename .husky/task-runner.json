@@ -8,22 +8,22 @@
       "group": "commit-msg"
     },
     {
-      "name": "Build | dotnet",
-      "command": "dotnet",
-      "args": ["build"],
+      "name": "Task | Build",
+      "command": "task",
+      "args": ["src:build"],
       "group": "pre-commit"
     },
     {
-      "name": "Clean C# | ReSharper CLI",
-      "command": "dotnet",
-      "args": ["jb", "cleanupcode", "${staged}"],
+      "name": "Task | C# Quality Gate",
+      "command": "task",
+      "args": ["fmt:refactor", "--", "${staged}"],
       "include": ["**/*.cs"],
       "group": "pre-commit"
     },
     {
-      "name": "Format non-C# | Prettier CLI",
-      "command": "bunx",
-      "args": ["prettier", "${staged}", "--write"],
+      "name": " | Prettier CLI",
+      "command": "task",
+      "args": ["fmt:prettier", "--", "${staged}"],
       "include": [
         "**/*.js",
         "**/*.jsx",
@@ -38,28 +38,28 @@
     },
     {
       "name": "Format C# | CSharpier",
-      "command": "dotnet",
-      "args": ["csharpier", "${staged}"],
+      "command": "task",
+      "args": ["fmt:csharp", "--", "${staged}"],
       "include": ["**/*.cs"],
       "group": "pre-commit"
     },
     {
-      "name": "Test | dotnet",
-      "command": "dotnet",
-      "args": ["test"],
+      "name": "Test | .NET",
+      "command": "task",
+      "args": ["src:test"],
       "group": "pre-commit"
     },
     {
-      "name": "Verify Pack (Core) | dotnet",
+      "name": "Verify Pack | .NET",
       "command": "dotnet",
       "args": ["pack", "src/SoapOnAScope/SoapOnAScope.csproj"],
       "group": "pre-commit"
     },
     {
-      "name": "Verify Pack (Web) | dotnet",
-      "command": "dotnet",
-      "args": ["pack", "src/SoapOnAScope.Web/SoapOnAScope.Web.csproj"],
-      "group": "pre-commit"
+      "name": "Task | Clean",
+      "command": "task",
+      "args": ["src:clean"],
+      "group": "post-checkout"
     }
   ]
 }

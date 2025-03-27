@@ -1,6 +1,3 @@
 namespace SoapOnAScope.UnitTests.Sanitization.ByType;
 
-public class StringPropertySanitizerTests
-{
-    
-}
+public class StringPropertySanitizerTests { }

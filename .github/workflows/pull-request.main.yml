@@ -1,1 +1,63 @@
+name: 🙋 Pull Request
+description: Run the quality control checks on the pull request
 
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  HUSKY: 0
+
+jobs:
+  format:
+    name: 💅 Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Setup Required Dependencies
+        uses: ./.github/actions/setup
+        env:
+          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+      - name: Format
+        run: |
+          task fmt:refactor -- .
+          task fmt:csharp -- .
+          task fmt:prettier -- .
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "ci: auto-formatting changes"
+          branch: ${{ github.head_ref }}
+
+  test:
+    name: 🏗️ Build
+    needs: format
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Setup Required Dependencies
+        uses: ./.github/actions/setup
+        env:
+          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+      - name: 💅 Format
+        run: |
+          task fmt:refactor -- .
+          task fmt:csharp -- .
+          task fmt:prettier -- .
+
+      - name: 🏗️ Build
+        run: task src:build
+
+      - name: 🧪 Test
+        run: task src:test
+
+      - name: 🧳 Pack (dry-run)
+        run: task src:pack

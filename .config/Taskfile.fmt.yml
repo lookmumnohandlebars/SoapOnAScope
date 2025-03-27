@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  # task fmt:csharp -- .
+  csharp:
+    desc: Format the C# source code
+    cmds:
+      - dotnet csharpier {{.CLI_ARGS}}
+
+  # task fmt:refactor -- .
+  refactor:
+    desc: Refactor the C# source code with quality gates in use
+    cmds:
+      - dotnet jb cleanupcode {{.CLI_ARGS}}
+
+  # task fmt:refactor -- .
+  prettier:
+    desc: Format the non-C# files
+    cmds:
+      - bunx prettier {{.CLI_ARGS}} --write

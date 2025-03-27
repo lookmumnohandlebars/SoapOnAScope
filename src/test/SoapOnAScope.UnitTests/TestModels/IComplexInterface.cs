@@ -1,6 +1,3 @@
 namespace SoapOnAScope.UnitTests.TestModels;
 
-public interface IComplexInterface
-{
-    
-}
+public interface IComplexInterface { }

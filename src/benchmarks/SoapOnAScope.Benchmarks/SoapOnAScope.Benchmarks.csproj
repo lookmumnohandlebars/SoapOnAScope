@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" />
+        <PackageReference Include="BenchmarkDotNet" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\lib\SoapOnAScope\SoapOnAScope.csproj" />
+        <ProjectReference Include="..\..\lib\SoapOnAScope\SoapOnAScope.csproj" />
     </ItemGroup>
 
 </Project>

@@ -16,18 +16,18 @@
         <PackageReference Include="NetArchTest.Rules" />
         <PackageReference Include="Verify" />
         <PackageReference Include="Verify.Xunit" />
-        <PackageReference Include="xunit"/>
-        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="xunit" />
+        <PackageReference Include="xunit.runner.visualstudio" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
+        <Using Include="Xunit" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\lib\SoapOnAScope.Web\SoapOnAScope.Web.csproj" />
-      <ProjectReference Include="..\..\lib\SoapOnAScope\SoapOnAScope.csproj" />
+        <ProjectReference Include="..\..\lib\SoapOnAScope.Web\SoapOnAScope.Web.csproj" />
+        <ProjectReference Include="..\..\lib\SoapOnAScope\SoapOnAScope.csproj" />
     </ItemGroup>
 
 </Project>

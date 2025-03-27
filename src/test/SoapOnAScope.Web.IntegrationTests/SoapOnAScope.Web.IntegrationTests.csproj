@@ -12,24 +12,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="coverlet.collector" />
         <PackageReference Include="FluentAssertions" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-        <PackageReference Include="xunit"/>
-        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="xunit" />
+        <PackageReference Include="xunit.runner.visualstudio" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
+        <Using Include="Xunit" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Collections\" />
+        <Folder Include="Collections\" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SoapOnAScope.Web.FakeRestApi\SoapOnAScope.Web.FakeRestApi.csproj" />
+        <ProjectReference Include="..\SoapOnAScope.Web.FakeRestApi\SoapOnAScope.Web.FakeRestApi.csproj" />
     </ItemGroup>
 
 </Project>

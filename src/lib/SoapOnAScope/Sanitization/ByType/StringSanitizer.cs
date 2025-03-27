@@ -7,7 +7,7 @@ internal class StringSanitizer(SanitizationSpecification spec)
         new TrimSanitizationAction(_ => spec.Trim),
         new HtmlEncodeSanitizationAction(_ => spec.HtmlEncode),
         new UrlEncodeSanitizationAction(_ => spec.UrlEncode),
-        new JavascriptEncodeSanitizationAction(_ => spec.JsEncode)
+        new JavascriptEncodeSanitizationAction(_ => spec.JsEncode),
     ];
 
     public string? PureSanitize(string? value)
