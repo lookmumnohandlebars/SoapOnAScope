@@ -23,7 +23,7 @@
       "name": "Task | Refactor C#",
       "command": "task",
       "args": ["fmt:refactor", "FILES=${staged}"],
-      "include": ["**/*.cs"],
+      "include": ["**/*.cs", "**/*.csx"],
       "group": "pre-commit"
     },
     {
@@ -45,8 +45,8 @@
     {
       "name": "Task | Format C#",
       "command": "task",
-      "args": ["fmt:csharp", "--", "${staged}"],
-      "include": ["**/*.cs"],
+      "args": ["fmt:csharp", "FILES=${staged}"],
+      "include": ["**/*.cs", "**/*.csx"],
       "group": "pre-commit"
     },
     {
