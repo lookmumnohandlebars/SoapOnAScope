@@ -47,9 +47,10 @@ jobs:
           reporter: dotnet-trx # Format of test results
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODE_COV_TOKEN }}
+          slug: lookmumnohandlebars/SoapOnAScope
 
   security:
     runs-on: ubuntu-latest
