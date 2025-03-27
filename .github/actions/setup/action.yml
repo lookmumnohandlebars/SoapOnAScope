@@ -1,7 +1,5 @@
 name: Setup Required Dependencies
 description: "Setup all required dependencies for working with the source code"
-env:
-  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 runs:
   using: "composite"
   steps:
