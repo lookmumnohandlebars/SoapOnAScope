@@ -3,9 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <IsPackable>true</IsPackable>
+        <Version>0.0.1</Version>
     </PropertyGroup>
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
-
+    <ItemGroup>
+      <ProjectReference Include="..\SoapOnAScope\SoapOnAScope.csproj" />
+    </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 using System.Reflection;
+using SoapOnAScope.Reflection.Models;
 
 namespace SoapOnAScope.Sanitization;
 
@@ -9,7 +10,7 @@ internal static class StringPropertySanitizer
     public static bool Sanitize<T>(
         PropertyInfo stringPropertyInfo,
         T parentModel,
-        SanitizationAttributeResult parentAttribute
+        SanitizationMetaData parentMetaData
     )
     {
         if (!stringPropertyInfo.IsWriteableString())
@@ -19,25 +20,24 @@ internal static class StringPropertySanitizer
         if (propValue is null)
             return false;
 
-        var (isPropEnabled, specFromProp) = stringPropertyInfo.GetPropertySanitizationAttribute();
-        if (!isPropEnabled && !parentAttribute.IsEnabled)
-            return false;
-
-        var specToUse = isPropEnabled ? specFromProp : parentAttribute.Specification;
-        SanitizeString(propValue, stringPropertyInfo, parentModel, specToUse);
-        return true;
+        var combinedSanitizationMetaData = stringPropertyInfo
+            .GetPropertySanitizationMetaData()
+            .Merge(parentMetaData);
+        
+        return SanitizeString(propValue, stringPropertyInfo, parentModel, combinedSanitizationMetaData);
     }
 
-    private static void SanitizeString<T>(
+    private static bool SanitizeString<T>(
         string propValue,
         PropertyInfo propInfo,
         T parentModel,
-        SanitizationSpecification spec
+        SanitizationMetaData spec
     )
     {
         var stringSanitizer = new StringSanitizer(spec);
         var sanitizedPropValue = stringSanitizer.PureSanitize(propValue);
         propInfo.SetValue(parentModel, sanitizedPropValue);
         LoggingAction?.Invoke(propInfo.Name, propValue, sanitizedPropValue);
+        return propValue != sanitizedPropValue;
     }
 }

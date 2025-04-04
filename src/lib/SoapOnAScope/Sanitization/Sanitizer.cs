@@ -1,3 +1,5 @@
+using SoapOnAScope.Reflection.Models;
+
 namespace SoapOnAScope;
 
 /// <summary>
@@ -8,8 +10,7 @@ public static class Sanitizer
 {
     /// <summary>
     ///     Sanitize string properties belonging to an object, or class instance,
-    ///     that either has the <see cref="AutoSanitizeAttribute"/> applied at the top level
-    ///     or has the <see cref="SanitizeAttribute"/> applied to a property
+    ///     
     /// </summary>
     /// <param name="instance">Instance to be sanitized</param>
     /// <typeparam name="T">The type of the instance</typeparam>
@@ -25,14 +26,24 @@ public static class Sanitizer
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="instance"></param>
+    /// <param name="sanitizationMetaData"></param>
+    public static void SanitizeObject(object? instance, SanitizationMetaData sanitizationMetaData)
+    {
+        UnknownSanitizer.Sanitize(instance, sanitizationMetaData);
+    }
+
+    /// <summary>
     ///     Sanitize a string variable (by reference) inline
     /// </summary>
     /// <param name="stringValue"></param>
-    /// <param name="specification"></param>
-    public static void Sanitize(ref string? stringValue, SanitizationSpecification? specification = null)
+    /// <param name="sanitizationMetaData"></param>
+    public static void SanitizeString(ref string? stringValue, SanitizationMetaData sanitizationMetaData)
     {
-        var specs = specification ?? new SanitizationSpecification(Trim: true);
-        var stringSanitizer = new StringSanitizer(specs);
+        if (stringValue is null) return;
+        var stringSanitizer = new StringSanitizer(sanitizationMetaData);
         stringValue = stringSanitizer.PureSanitize(stringValue);
     }
 }

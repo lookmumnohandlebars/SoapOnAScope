@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Reflection;
+using SoapOnAScope.Reflection.Models;
 
 namespace SoapOnAScope;
 
@@ -22,20 +23,14 @@ internal static class PropertyInfoExtensions
     public static IEnumerable<PropertyInfo> WhereObjectProperty(this IEnumerable<PropertyInfo> properties) =>
         properties.Where(prop => prop.PropertyType.IsClass || prop.PropertyType.IsInterface);
 
-    public static SanitizationAttributeResult GetPropertySanitizationAttribute(this PropertyInfo propertyInfo)
-    {
-        //This may need to be caught, null handling may not be enough
-        var attr = propertyInfo.GetCustomAttribute<SanitizeAttribute>();
-        if (attr is null)
-            return new SanitizationAttributeResult(false, new SanitizationSpecification());
-        return new SanitizationAttributeResult(
-            true,
-            new SanitizationSpecification(
-                Trim: attr.Trim,
-                HtmlEncode: attr.Html,
-                UrlEncode: attr.Url,
-                JsEncode: attr.JavaScript
-            )
+    public static PropertySanitizationAttributeResult<T> GetSanitizationAttribute<T>(this PropertyInfo propertyInfo)
+        where T : BaseSanitizationAttribute => new (propertyInfo.GetCustomAttribute<T>());
+
+    public static SanitizationMetaData GetPropertySanitizationMetaData(this PropertyInfo propertyInfo) =>
+        new(
+            trim: GetSanitizationAttribute<TrimAttribute>(propertyInfo),
+            encodeHtml: GetSanitizationAttribute<EncodeHtmlAttribute>(propertyInfo),
+            encodeJavaScript: GetSanitizationAttribute<EncodeJavaScriptAttribute>(propertyInfo),
+            encodeUrl: GetSanitizationAttribute<EncodeURLAttribute>(propertyInfo)
         );
-    }
 }

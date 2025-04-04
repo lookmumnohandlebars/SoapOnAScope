@@ -1,6 +1,4 @@
 using System.Reflection;
-using System.Text;
-using System.Web;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace SoapOnAScope.Web;
@@ -10,11 +8,15 @@ namespace SoapOnAScope.Web;
 ///     or minimal API, method.
 /// </summary>
 /// <code>
+///     [AutoTrim]
+///     public class MyRequest {
+///         public string Content { get; set; }
+///     }
+/// 
 ///     public class MyController : ControllerBase {
-///
 ///       [HttpPost]
 ///       [SanitizeRequest]
-///       public IActionResult MyMethod([FromBody] MyRequest request, [FromQuery] string name) {
+///       public IActionResult MyMethod([FromBody] MyRequest request, [FromQuery] [Trim] string name) {
 ///         _service.DoSomething(request, name);
 ///         return Accepted();
 ///       }
@@ -23,7 +25,7 @@ namespace SoapOnAScope.Web;
 /// <remarks>
 ///     This is
 /// </remarks>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Parameter)]
+[AttributeUsage(AttributeTargets.Method)]
 public class SanitizeRequestAttribute : ActionFilterAttribute
 {
     /// <summary>
@@ -32,9 +34,11 @@ public class SanitizeRequestAttribute : ActionFilterAttribute
     /// <param name="actionContext"></param>
     public override void OnActionExecuting(ActionExecutingContext actionContext)
     {
+        //actionContext.ActionDescriptor.Parameters;
+        //Handle parameter attributes
+        //Handle class attributes on classes
         foreach (var requestParam in actionContext.ActionArguments)
         {
-            //TODO: Make this align with
             var properties =
                 requestParam
                     .Value?.GetType()
@@ -47,10 +51,11 @@ public class SanitizeRequestAttribute : ActionFilterAttribute
                     ) ?? new List<PropertyInfo>();
             foreach (var propertyInfo in properties)
             {
-                propertyInfo.SetValue(
-                    requestParam.Value,
-                    HttpUtility.HtmlEncode(propertyInfo.GetValue(requestParam.Value) as string)
-                );
+                
+                // propertyInfo.SetValue(
+                //     requestParam.Value,
+                //     Sanitizer.Sanitize(propertyInfo.GetValue(requestParam.Value))
+                // );
             }
         }
     }

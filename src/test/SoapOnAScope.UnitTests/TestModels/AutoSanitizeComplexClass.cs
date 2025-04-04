@@ -1,4 +1,4 @@
 namespace SoapOnAScope.UnitTests.TestModels;
 
-[AutoSanitize]
+[AutoTrim]
 public class AutoSanitizeComplexClass : ComplexClass { }

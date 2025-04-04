@@ -15,7 +15,7 @@ public class SdkRegressionTests
     }
 
     [Fact]
-    public Task Methods_on_public_classes_should()
+    public Task Methods_on_public_classes_should_not_unintentionally_regress()
     {
         //Note!: Any non-additive changes should require a new major version
         //Additions should require a new minor version
